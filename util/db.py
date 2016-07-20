@@ -13,31 +13,11 @@ def _initMysqlConn():
 	conn = MySQLdb.connect("localhost","root","123456","meta_stackoverflow")
 	return conn
 
-def showDbVersion(pool):
-	conn = pool.connection()
-	# 使用cursor()方法获取操作游标 
-	cursor = conn.cursor()
-
-	# 使用execute方法执行SQL语句
-	cursor.execute("SELECT VERSION()")
-
-	# 使用 fetchone() 方法获取一条数据库。
-	data = cursor.fetchone()
-
-	print "Database version : %s " % data
-	cursor.close()
-	conn.close()
-
-def executeSql(param):
+def executeSql(sql):
 	conn = pool.connection()
 	cur = conn.cursor()
 	try:
-		if type(param) == str:
-			cur.execute(param)
-		elif type(param) == tuple:
-			cur.execute(param[0],param[1])
-		else:
-			return None
+		cur.execute(sql)
 		results = cur.fetchall()
 	except Exception, e:
 		return None
@@ -47,9 +27,9 @@ def executeSql(param):
 
 if __name__ == '__main__':
 	pool = _initMysqlPool()
-	showDbVersion(pool)
 	data = executeSql('select * from Badges')
 	print type(data)
 	print len(data)
 	for item in data:
 		print item
+	pool.close()
