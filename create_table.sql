@@ -1,3 +1,4 @@
+-- init database and import data from xml files
 drop database if exists meta_stackoverflow;
 create database meta_stackoverflow;
 use meta_stackoverflow;
