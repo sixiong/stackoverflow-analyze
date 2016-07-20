@@ -7,7 +7,7 @@
 - mysql-workbench
 - pip install -r requirements.txt
 - 数据集
-- (参考)[https://www.quora.com/What-should-I-learn-in-data-science-in-100-hours]
+- [参考](https://www.quora.com/What-should-I-learn-in-data-science-in-100-hours)
 
 ##第一天
 - mysql
