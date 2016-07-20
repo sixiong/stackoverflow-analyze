@@ -1,4 +1,5 @@
 #stackoverflow数据挖掘项目
+
 ##准备工作
 - ubuntu14.10 *error*
 - 翻墙工具
@@ -7,6 +8,7 @@
 - pip install MySQL-python
 - pip install DBUtils
 - 数据集
+
 ##第一天
 - mysql
 	1.安装
