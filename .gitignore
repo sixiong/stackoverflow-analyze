@@ -1,2 +1,2 @@
-data/meta/*
+data/meta/*.xml
 *.pyc
