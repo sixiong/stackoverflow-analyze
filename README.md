@@ -34,4 +34,6 @@
     + numpy
     + pandas
     + 把实验楼上的python科学计算课程过一遍
+    	+ [Python科学计算(一)](https://www.shiyanlou.com/courses/348)
+    	+ [Python科学计算(二)](https://www.shiyanlou.com/courses/391)
 - 学会做一些基本的统计
