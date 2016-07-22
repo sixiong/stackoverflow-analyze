@@ -28,11 +28,16 @@ def showDbVersion(pool):
 	cursor.close()
 	conn.close()
 
-def executeSql(sql):
+def executeSql(param):
 	conn = pool.connection()
 	cur = conn.cursor()
 	try:
-		cur.execute(sql)
+		if type(param) == str:
+			cur.execute(param)
+		elif type(param) == tuple:
+			cur.execute(param[0],param[1])
+		else:
+			return None
 		results = cur.fetchall()
 	except Exception, e:
 		return None
