@@ -3,33 +3,19 @@
 
 import MySQLdb
 from DBUtils.PooledDB import PooledDB
+from mysql_settings import *
 
-def _initMysqlPool():
-	pool = PooledDB(MySQLdb,5,host='localhost',user='root',passwd='123456',db='meta_stackoverflow',port=3306)
+def initMysqlPool():
+	pool = PooledDB(MySQLdb,MYSQL_CONNECTION_POOL_SIZE,host=HOST,user=USER,passwd=PASSWORD,db=DB,port=PORT)
 	return pool
 
-def _initMysqlConn():
+def initMysqlConn():
 	# 打开数据库连接
-	conn = MySQLdb.connect("localhost","root","123456","meta_stackoverflow")
+	conn = MySQLdb.connect(host=HOST,user=USER,passwd=PASSWORD,db=DB,port=PORT)
 	return conn
+	MySQLdb.connect
 
-def showDbVersion(pool):
-	conn = pool.connection()
-	# 使用cursor()方法获取操作游标 
-	cursor = conn.cursor()
-
-	# 使用execute方法执行SQL语句
-	cursor.execute("SELECT VERSION()")
-
-	# 使用 fetchone() 方法获取一条数据库。
-	data = cursor.fetchone()
-
-	print "Database version : %s " % data
-	cursor.close()
-	conn.close()
-
-def executeSql(sql):
-	conn = pool.connection()
+def executeSql(conn,sql):
 	cur = conn.cursor()
 	try:
 		cur.execute(sql)
@@ -41,11 +27,14 @@ def executeSql(sql):
 	return results
 
 if __name__ == '__main__':
-	pool = _initMysqlPool()
-	showDbVersion(pool)
-	data = executeSql('select * from Badges')
+	pool = initMysqlPool()
+	# conn = pool.connection()
+	conn = initMysqlConn()
+	data = executeSql(conn,'select * from Badges limit 2')
 	print type(data)
 	print len(data)
+	print data
 	for item in data:
 		print item
+	conn.close()
 	pool.close()
